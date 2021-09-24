@@ -1,0 +1,73 @@
+.card-custom:hover{
+  box-shadow: 2px 2px 20px darkgrey;
+  transition: ease-in 0.5s;
+}
+.card{
+  max-width: 250px;
+  margin: auto;
+}
+
+.card-custom:hover img{
+  transform: scale(1.5,1.5);
+  transition: ease-in 500ms;
+  opacity: 0.7;
+  height: 300px;
+}
+
+.card-custom img{
+  transform: scale(1,1);
+  transition: ease-out 500ms;
+  height: 300px;
+}
+
+.card-img-wrapper{
+  overflow: hidden;
+  position: relative;
+}
+
+.member-icons{
+  position: absolute;
+  bottom: -50%;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+.card-img-wrapper:hover .member-icons{
+  bottom: 0;
+}
+.member-icons button{
+  margin-right: 5px;
+}
+.animate{
+  transition: all ease-in-out 0.3s;
+}
+#book_detail{
+  color: black !important;
+  text-decoration: none !important;
+}
+.author-detail{
+  margin-bottom: 5px;
+  color: #ddd;
+}
+.clip{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.clip-name{
+  font-size: 24px;
+  max-width: 100ch;
+}
+.clip-author-detail{
+  font-size: 16px;
+  max-width: 120ch;
+  margin-top: -10px;
+}
+
+.card-body p{
+  margin-bottom: 0;
+}
+.price-desc{
+  font-size: 26px;
+}

@@ -1,0 +1,22 @@
+<a id ="book_detail" routerLink="/bookdetail/{{Book.Id}}">
+  <div class="card card-custom">
+    <div class="card-img-wrapper">
+       <img src="assets/images/{{Book.Image}}.jpg" class="card-img-top" alt="...">
+       <!-- <div>
+           <ul class="list-inline text-center member-icons animate">
+              <button class="btn btn-primary" > <li class="list-inline-item"><i class="far fa-edit"></i></li> </button>
+              <button class="btn btn-primary"><li class="list-inline-item"> <i class="far fa-address-book"></i> </li></button>
+           </ul>
+       </div> -->
+    </div>
+        <div class="card-body">
+            <h3 class="card-title clip clip-name">{{Book.Name}}</h3>
+            <p class="card-text clip clip-author-detail">-By {{Book.Author}}</p>
+
+            <div class="d-flex justify-content-between mt-2">
+              <p class="card-text price-desc"> &#8377; {{Book.Price}}</p>
+              <a href="https://google.com" target="_blank" class="btn btn-primary">Buy Now</a>
+            </div>
+        </div>
+  </div>
+  </a>

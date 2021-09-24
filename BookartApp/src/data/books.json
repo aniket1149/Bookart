@@ -1,0 +1,50 @@
+[
+  {
+  "Id":1,
+  "Name":"Harry Potter and the chamer of secrets",
+  "Description":"abraka dabra abra ka dabra abra ka dabra abra ka bdabra abra ka dabra abara",
+  "Price":"499",
+  "Author": "JK Rowling",
+  "Image":"book-1"
+  },
+  {
+    "Id":2,
+    "Name":"Harry Potter the prisoner of azkaban",
+    "Price":"499",
+    "Author": "JK Rowling",
+    "Image":"book-2"
+    },
+    {
+      "Id":3,
+      "Name":"Harry Potter- Deathly Hallow part 1",
+      "Description":"abraka dabra abra ka dabra abra ka dabra abra ka bdabra abra ka dabra abara",
+      "Price":"499",
+      "Author": "JK Rowling",
+      "Image":"book-3"
+      },
+  {
+    "Id":4,
+    "Name":"Harry Potter -IV",
+    "Price":"499",
+    "Author": "JK Rowling",
+    "Image":"book-4"
+    },
+  {
+    "Id":5,
+    "Name":"Harry Potter -V",
+    "Description":"abraka dabra abra ka dabra abra ka dabra abra ka bdabra abra ka dabra abara",
+    "Price":"499",
+    "Author": "JK Rowling",
+    "Image":"book-5"
+
+    },
+  {
+    "Id":6,
+    "Name":"Harry Potter- VI",
+    "Price":"499",
+    "Author": "JK Rowling",
+    "Image":"book-6"
+    }
+  ]
+
+
