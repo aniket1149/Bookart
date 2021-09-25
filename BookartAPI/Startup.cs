@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookartAPI.Helpers;
 using Core.Interface;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
@@ -35,8 +36,9 @@ namespace BookartAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookartAPI", Version = "v1" });
             });
-
+            services.AddAutoMapper(typeof(MappingHelper));
             services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +54,7 @@ namespace BookartAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
