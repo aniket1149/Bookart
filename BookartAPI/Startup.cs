@@ -58,6 +58,14 @@ namespace BookartAPI
 
                  };
             });
+
+            services.AddCors(opt=>
+                {
+                    opt.AddPolicy("corspolicy", policy => {
+                        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                    });
+                }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,6 +85,7 @@ namespace BookartAPI
 
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseCors("corspolicy");
 
             app.UseAuthorization();
 

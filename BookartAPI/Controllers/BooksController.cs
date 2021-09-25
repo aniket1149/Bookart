@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookartAPI.DTO;
+using BookartAPI.Helpers;
 using Core.Entities;
 using Core.Interface;
 using Core.Specification;
@@ -30,13 +31,18 @@ namespace BookartAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<BookReturnToDto>>> GetAllBooks()
+        public async Task<ActionResult<Pagination<BookReturnToDto>>> GetAllBooks([FromQuery]BookSpecParams bookSpecParams
+            )
         {
-            var spec = new BooksWithCategoryAndAuthor();
+            var spec = new BooksWithCategoryAndAuthor(bookSpecParams);
+            var countSpec = new BookWithFilterAndCounterSpecification(bookSpecParams);
+            var totalItems = await _bookRepo.CountAsync(countSpec);
             var AllBooks = await _bookRepo.ListAsync(spec);
 
-            return Ok(
-                _mapper.Map<IReadOnlyList<Book>, IReadOnlyList<BookReturnToDto>>(AllBooks));
+            var data = _mapper.Map<IReadOnlyList<Book>, IReadOnlyList<BookReturnToDto>>(AllBooks);
+
+            return Ok(new Pagination<BookReturnToDto>(bookSpecParams.PageIndex, bookSpecParams.PageSize, totalItems, data));
+                
         }
 
         [HttpGet("{id}")]
