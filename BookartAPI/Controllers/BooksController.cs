@@ -14,9 +14,8 @@ using System.Threading.Tasks;
 
 namespace BookartAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BooksController : ControllerBase
+    
+    public class BooksController : BaseApiController
     {
         private readonly IGenericRepository<Book> _bookRepo;
         private readonly IGenericRepository<Category> _categoryRepo;
