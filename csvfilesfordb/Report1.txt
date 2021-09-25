@@ -1,0 +1,43 @@
+Operation stopped...
+
+- Initializing Data Flow Task (Success)
+
+- Initializing Connections (Success)
+
+- Setting SQL Command (Success)
+
+- Setting Source Connection (Success)
+
+- Setting Destination Connection (Success)
+
+- Validating (Success)
+	Messages
+	* Warning 0x80049304: Data Flow Task 1: Warning: Could not open global shared memory to communicate with performance DLL; data flow performance counters are not available.  To resolve, run this package as an administrator, or on the system's console.
+	 (SQL Server Import and Export Wizard)
+	
+
+- Prepare for Execute (Success)
+
+- Pre-execute (Error)
+	Messages
+	* Error 0xc020802e: Data Flow Task 1: The data type for "Destination - BooksData_csv.Inputs[Flat File Destination Input].Columns[PictureUrl]" is DT_NTEXT, which is not supported with ANSI files. Use DT_TEXT instead and convert the data to DT_NTEXT using the data conversion component.
+	 (SQL Server Import and Export Wizard)
+	
+	* Error 0xc0202094: Data Flow Task 1: Unable to retrieve column information from the flat file connection manager.
+	 (SQL Server Import and Export Wizard)
+	
+	* Error 0xc004701a: Data Flow Task 1: Destination - BooksData_csv failed the pre-execute phase and returned error code 0xC0202094.
+	 (SQL Server Import and Export Wizard)
+	
+	* Information 0x4004300b: Data Flow Task 1: "Destination - BooksData_csv" wrote 0 rows.
+	 (SQL Server Import and Export Wizard)
+	
+
+- Executing (Success)
+
+- Copying to C:\Users\Aniket Thakker\Desktop\Bookart\csvfilesfordb\BooksData.csv (Stopped)
+
+- Post-execute (Stopped)
+
+
+

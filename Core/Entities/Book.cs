@@ -7,10 +7,22 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class Book
+    public class Book :BaseEntity
     {
-        public int Id { get; set; }
         [Required]
-        public string BookName { get; set; }
+        [MaxLength(100)]
+        public string BookName { get; set; } 
+        [Required]
+        [MaxLength(180)]
+        public string Description { get; set; }
+        [Required]
+        public decimal Price { get; set; }
+        public string PictureUrl { get; set; }
+        [Required]
+        public Category CategoryName { get; set; }
+        public int CategoryId { get; set; }
+        [Required]
+        public Author BookAuthor { get; set; }
+        public int BookAuthorId { get; set; }
     }
 }

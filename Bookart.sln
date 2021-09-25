@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookartAPI", "BookartAPI\BookartAPI.csproj", "{8BC14411-8249-462A-94CC-244E9345D7A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookartAPI", "BookartAPI\BookartAPI.csproj", "{8BC14411-8249-462A-94CC-244E9345D7A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{4E92A89C-97E3-461B-8A89-A60F3F6E6A5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{AF8AD04B-86FF-4BBD-BC8A-56B3E324D34B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{AF8AD04B-86FF-4BBD-BC8A-56B3E324D34B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A3105829-3760-44D2-9948-38DC7EA10DB6}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +22,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8BC14411-8249-462A-94CC-244E9345D7A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -58,5 +60,11 @@ Global
 		{AF8AD04B-86FF-4BBD-BC8A-56B3E324D34B}.Release|x64.Build.0 = Release|Any CPU
 		{AF8AD04B-86FF-4BBD-BC8A-56B3E324D34B}.Release|x86.ActiveCfg = Release|Any CPU
 		{AF8AD04B-86FF-4BBD-BC8A-56B3E324D34B}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6273BCB1-3E30-4320-80AA-D15C275138DF}
 	EndGlobalSection
 EndGlobal

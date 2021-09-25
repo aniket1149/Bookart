@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Interface;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +15,16 @@ namespace BookartAPI.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly BookStoreContext _context;
-        public BooksController(BookStoreContext context)
+        private readonly IBookRepository _repo;
+        public BooksController(IBookRepository repo)
         {
-            _context= context;
+            _repo = repo;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Book>>> GetAllBooks()
         {
-            var AllBooks = await _context.Books.ToListAsync();
+            var AllBooks = await _repo.GetBooksAsync();
 
             return Ok(AllBooks);
         }
@@ -31,7 +32,17 @@ namespace BookartAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> GetBook(int id)
         {
-            return await _context.Books.FindAsync(id);
+            return await _repo.GetBookByIdAsync(id);
+        }
+
+        [HttpGet("Authors")]
+        public async Task<ActionResult<IReadOnlyList<Author>>> GetAllAuthors() {
+            return Ok(await _repo.GetAuthorsAsync());
+        }
+
+        [HttpGet("Categories")]
+        public async Task<ActionResult<IReadOnlyList<Category>>> GetAllCategories() {
+            return Ok(await _repo.GetCategoryAsync());
         }
     }
 }
