@@ -27,14 +27,14 @@ namespace Infrastructure.Data
             return await _context.Books
                 .Include(p => p.BookAuthor)
                 .Include(p => p.CategoryName)
-                .FirstOrDefaultAsync(p=>p.Id == id);
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<IReadOnlyList<Book>> GetBooksAsync()
         {
             return await _context.Books
-                .Include(p=>p.BookAuthor)
-                .Include(p=>p.CategoryName)
+                .Include(p => p.BookAuthor)
+                .Include(p => p.CategoryName)
                 .ToListAsync();
         }
 
@@ -42,5 +42,7 @@ namespace Infrastructure.Data
         {
             return await _context.Categories.ToListAsync();
         }
+
+
     }
 }

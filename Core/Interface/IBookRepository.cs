@@ -14,5 +14,7 @@ namespace Core.Interface
         Task<IReadOnlyList<Category>> GetCategoryAsync();
         Task<IReadOnlyList<Author>> GetAuthorsAsync();
 
+        
+
     }
 }

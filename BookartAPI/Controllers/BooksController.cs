@@ -63,5 +63,12 @@ namespace BookartAPI.Controllers
         public async Task<ActionResult<IReadOnlyList<Category>>> GetAllCategories() {
             return Ok(await _categoryRepo.ListAllAsync());
         }
+
+        [HttpPost]
+        public async Task<ActionResult<BookReturnToDto>> SellBook(BookReturnToDto uploadData)
+        {
+            
+            return Ok();
+        }
     }
 }
