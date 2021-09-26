@@ -3,9 +3,8 @@
     "",
     "\\BookartAPI",
     "\\Core",
-    "\\Core\\obj",
     "\\Infrastructure"
   ],
-  "SelectedNode": "\\Core\\Core.csproj",
+  "SelectedNode": "\\Bookart.sln",
   "PreviewInSolutionExplorer": false
 }
