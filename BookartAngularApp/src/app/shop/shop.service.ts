@@ -5,6 +5,7 @@ import { ICategory } from '../shared/models/ICategory';
 import { IPagination } from '../shared/models/IPagination';
 import {map} from 'rxjs/Operators'
 import { BookParams } from '../shared/models/BookParams';
+import { IBooks } from '../shared/models/IBooks';
 @Injectable({
   providedIn: 'root'
 })
@@ -35,7 +36,9 @@ export class ShopService {
         )
     );
   }
-
+  getBookDetail(id:number){
+    return this.http.get<IBooks>(this.baseUrl+'Books/'+id);
+  }
   getCategories(){
     return this.http.get<ICategory[]>(this.baseUrl+'Books/Categories');
   }
