@@ -17,28 +17,38 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis;
 
 namespace BookartAPI
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+      
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BookStoreContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Infrastructure")));
+            services.AddDbContext<BookStoreContext>(x => x.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Infrastructure")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookartAPI", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
+            
+            services.AddSingleton<ConnectionMultiplexer>(
+                c =>
+                {
+                    var con = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"), true);
+                    return ConnectionMultiplexer.Connect(con);
+                }
+                );
             services.AddAutoMapper(typeof(MappingHelper));
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
@@ -58,7 +68,7 @@ namespace BookartAPI
 
                  };
             });
-
+            services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddCors(opt=>
                 {
                     opt.AddPolicy("corspolicy", policy => {
