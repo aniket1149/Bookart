@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartService } from 'src/app/cart/cart.service';
 import { IBooks } from 'src/app/shared/models/IBooks';
 import { ShopService } from '../shop.service';
 
@@ -10,11 +11,24 @@ import { ShopService } from '../shop.service';
 })
 export class BookDetailsComponent implements OnInit {
   book: IBooks;
-
-  constructor(private shopService: ShopService, private activateRoute: ActivatedRoute) { }
+  quantity= 1;
+  constructor(private shopService: ShopService, private activateRoute: ActivatedRoute,private cartService: CartService) { }
 
   ngOnInit(): void {
     this.loadProduct();
+  }
+  addBookToCart(){
+    this.cartService.addItemToCart(this.book, this.quantity);
+  }
+
+  incrementQuantity(){
+    this.quantity++;
+  }
+  decrementQuantity(){
+    if(this.quantity>1){
+      this.quantity--;
+    }
+
   }
 
   loadProduct(){

@@ -23,18 +23,18 @@ namespace BookartAPI
 {
     public class Startup
     {
-        private readonly IConfiguration _configuration;
+        
         public Startup(IConfiguration configuration)
         {
-            _configuration = configuration;
+            _Configuration = configuration;
         }
 
-      
+        public IConfiguration _Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BookStoreContext>(x => x.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Infrastructure")));
+            services.AddDbContext<BookStoreContext>(x => x.UseSqlServer(_Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Infrastructure")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -42,10 +42,10 @@ namespace BookartAPI
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
             
-            services.AddSingleton<ConnectionMultiplexer>(
+            services.AddSingleton<IConnectionMultiplexer>(
                 c =>
                 {
-                    var con = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"), true);
+                    var con = ConfigurationOptions.Parse(_Configuration.GetConnectionString("Redis"), true);
                     return ConnectionMultiplexer.Connect(con);
                 }
                 );

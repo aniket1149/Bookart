@@ -34,6 +34,7 @@ namespace BookartAPI.Controllers
         public async Task<ActionResult<Pagination<BookReturnToDto>>> GetAllBooks([FromQuery]BookSpecParams bookSpecParams
             )
         {
+
             var spec = new BooksWithCategoryAndAuthor(bookSpecParams);
             var countSpec = new BookWithFilterAndCounterSpecification(bookSpecParams);
             var totalItems = await _bookRepo.CountAsync(countSpec);

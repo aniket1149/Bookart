@@ -7,9 +7,9 @@
 
   </nav>
   <div class="d-flex align-items-center">
-    <button class="btn btn-close-white">
+    <button class="btn btn-close-white" routerLink="/cart">
       <i class="fab fa-opencart" style="font-size: 25px;"></i>
-      <div style="font-size: 10px"class="badge bg-danger rounded-circle text-white ">4</div>
+      <div *ngIf="(cart$ | async) as cart" style="font-size: 10px"class="badge bg-danger rounded-circle text-white ">{{cart.items.length}}</div>
     </button>
     <a class="btn btn-outline-primary mr-2" href="#">Login</a>
     <a class="btn btn-outline-primary mr-3" href="#">Sign Up</a>
