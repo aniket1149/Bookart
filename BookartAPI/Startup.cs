@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BookartAPI.Errors;
+using BookartAPI.Extensions;
 using BookartAPI.Helpers;
 using BookartAPI.Middleware;
+using Core.Entities.Identities;
 using Core.Interface;
 using Infrastructure.Data;
+using Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -18,6 +21,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
+using BookartAPI.Extensions;
 
 namespace BookartAPI
 {
@@ -35,6 +39,13 @@ namespace BookartAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BookStoreContext>(x => x.UseSqlServer(_Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Infrastructure")));
+
+            services.AddDbContext<AppIdentityDbContext>(
+                x =>
+                {
+                    x.UseSqlServer(_Configuration.GetConnectionString("IdentityConnection"));
+                }
+                );
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -68,6 +79,9 @@ namespace BookartAPI
 
                  };
             });
+            //services.IdentityServiceExtensions.AddIdentityServices();
+
+            services.AddIdentityServices();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddCors(opt=>
                 {
