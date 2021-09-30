@@ -22,12 +22,16 @@ namespace BookartAPI.Controllers
         private readonly IGenericRepository<Category> _categoryRepo;
         private readonly IGenericRepository<Author> _authorRepo;
         private readonly IMapper _mapper;
-        public BooksController(IGenericRepository<Book> bookRepo, IGenericRepository<Category> categoryRepo, IGenericRepository<Author> authorRepo, IMapper mapper)
+        private readonly IBookRepository ibookrepo;
+
+        public BooksController(IGenericRepository<Book> bookRepo, IGenericRepository<Category> categoryRepo, IGenericRepository<Author> authorRepo, IMapper mapper, IBookRepository ibookrepo
+            )
         {
             _bookRepo = bookRepo;
             _categoryRepo = categoryRepo;
             _authorRepo = authorRepo;
             _mapper = mapper;
+            this.ibookrepo = ibookrepo;
         }
 
         [HttpGet]
@@ -44,6 +48,32 @@ namespace BookartAPI.Controllers
 
             return Ok(new Pagination<BookReturnToDto>(bookSpecParams.PageIndex, bookSpecParams.PageSize, totalItems, data));
                 
+        }
+        [HttpGet("latest")]
+        public async Task<ActionResult<IReadOnlyList<BookReturnToDto>>> GetAllBookLatestInOrder()
+        {
+
+            // var books = await ibookrepo.GetLatestBookAsync();
+            BookSpecParams homesort = new BookSpecParams();
+            homesort.sort = "latestFirst";
+            
+            var spec = new BooksWithCategoryAndAuthor(homesort);
+            var books = await _bookRepo.ListAsync(spec);
+            /*return books.Select(book => new BookReturnToDto
+            {
+                Id = book.Id,
+                BookName = book.BookName,
+                Description = book.Description,
+                Price = book.Price,
+                PictureUrl = book.PictureUrl,
+                CategoryName = book.CategoryName.CategoryName.ToString(),
+                BookAuthor = book.BookAuthor.AuthorName
+            }).ToList();*/
+            var data = _mapper.Map<IReadOnlyList<Book>, IReadOnlyList<BookReturnToDto>>(books).Take(3);
+            
+            return Ok(data);
+
+
         }
 
         [HttpGet("{id}")]

@@ -21,6 +21,10 @@ import { ShopRoutingModule } from './shop-routing.module';
     RouterModule,
     ShopRoutingModule
   ],
+  exports:[
+    ShopComponent,
+    BookItemComponent
+  ]
 
 })
 export class ShopModule { }

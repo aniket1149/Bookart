@@ -31,6 +31,9 @@ namespace Core.Specification
                     case "priceDesc":
                         AddOrderByDescending(p => p.Price);
                         break;
+                    case "latestFirst":
+                        AddOrderByDescending(p => p.GetDateTime);
+                        break;
                     default:
                         AddOrderBy(p => p.BookName);
                         break;

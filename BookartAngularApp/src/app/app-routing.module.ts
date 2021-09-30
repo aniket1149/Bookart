@@ -7,9 +7,13 @@ import { ShopComponent } from './shop/shop.component';
 const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'shop', loadChildren:()=>import('./shop/shop.module').then(mod=>mod.ShopModule)},
+
+  //{path: 'shop/:id', loadChildren:()=>import('./shop/shop.module').then(mod=>mod.ShopModule)},
   {path: 'cart', loadChildren:()=>import('./cart/cart.module').then(mod=>mod.CartModule)},
+  {path: 'sell', loadChildren:()=>import('./sell/sell.module').then(mod=>mod.SellModule)},
+  //{path:'shop',component: ShopComponent},
   {path: 'checkout', loadChildren:()=>import('./checkout/checkout.module').then(mod=>mod.CheckoutModule)},
-  // {path: 'shop/:id', component: BookDetailsComponent},
+   //{path: 'shop/:id', component: BookDetailsComponent},
 
 
 

@@ -1,0 +1,8 @@
+.card{
+  max-width: 250px;
+
+  margin: auto !important;
+}
+.img-fluid{
+  max-height: 305px;
+}

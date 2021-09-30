@@ -24,5 +24,7 @@ namespace Core.Entities
         [Required]
         public Author BookAuthor { get; set; }
         public int BookAuthorId { get; set; }
-    }
+
+        public DateTime? GetDateTime { get; set; }
+    } 
 }

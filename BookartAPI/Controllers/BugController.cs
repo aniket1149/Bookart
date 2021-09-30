@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookartAPI.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class BugController: BaseApiController
     {
         private readonly BookStoreContext _context;

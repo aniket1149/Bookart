@@ -11,7 +11,8 @@ namespace Core.Specification
     {
         public BookWithFilterAndCounterSpecification(BookSpecParams bookSpecParams) 
             : base(x =>
-            (string.IsNullOrEmpty(bookSpecParams.search) || x.BookName.ToLower().Contains(bookSpecParams.search)) &&
+            (string.IsNullOrEmpty(bookSpecParams.search) || x.BookName.ToLower().Contains(bookSpecParams.search) || x.Description.ToLower().Contains(bookSpecParams.search) || x.BookAuthor.AuthorName.ToLower().Contains(bookSpecParams.search))
+            &&
                  (!bookSpecParams.categoryId.HasValue || x.CategoryId == bookSpecParams.categoryId) &&
                  (!bookSpecParams.authorId.HasValue || x.BookAuthorId == bookSpecParams.authorId))
         {

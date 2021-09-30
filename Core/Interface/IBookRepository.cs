@@ -13,8 +13,9 @@ namespace Core.Interface
         Task<IReadOnlyList<Book>> GetBooksAsync();
         Task<IReadOnlyList<Category>> GetCategoryAsync();
         Task<IReadOnlyList<Author>> GetAuthorsAsync();
+        Task<IReadOnlyList<Book>> GetLatestBookAsync();
 
-        
+
 
     }
 }

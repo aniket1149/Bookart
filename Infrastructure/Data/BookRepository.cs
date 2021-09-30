@@ -43,6 +43,14 @@ namespace Infrastructure.Data
             return await _context.Categories.ToListAsync();
         }
 
+        public async Task<IReadOnlyList<Book>> GetLatestBookAsync()
+        {
+            return await _context.Books
+                .Include(b=>b.CategoryName)
+                .Include(b=>b.BookAuthor)                
+                .OrderByDescending(p => p.GetDateTime).Take(3).ToListAsync();
+        }
 
+        
     }
 }

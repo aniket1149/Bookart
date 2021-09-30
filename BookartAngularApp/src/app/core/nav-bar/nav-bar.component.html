@@ -1,9 +1,9 @@
 <div class="d-flex flex-column flex-md-row align-items-center justify-content-between p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm fixed-top">
-  <h5 class="my-0 font-weight-normal" style="max-height: 70px;" routerLink="/">Logo goes here</h5>
+  <h5 class="my-0 font-weight-normal" style="max-height: 70px;" routerLink="/"><strong style = "font-size: 30px; cursor: pointer;"><i>Bookart</i></strong></h5>
   <nav class="my-2 my-md-0 mr-md-3">
     <a class="p-2 " [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" >Home</a>
     <a class="p-2 " routerLink="/shop" routerLinkActive="active">Buy</a>
-    <a class="p-2 " href="#" routerLinkActive="active">Sell</a>
+    <a class="p-2 " routerLink="/sell" routerLinkActive="active">Sell</a>
 
   </nav>
   <div class="d-flex align-items-center">
@@ -11,8 +11,8 @@
       <i class="fab fa-opencart" style="font-size: 25px;"></i>
       <div *ngIf="(cart$ | async) as cart" style="font-size: 10px"class="badge bg-danger rounded-circle text-white ">{{cart.items.length}}</div>
     </button>
-    <a class="btn btn-outline-primary mr-2" href="#">Login</a>
-    <a class="btn btn-outline-primary mr-3" href="#">Sign Up</a>
+    <a class="btn btn-outline-warning mr-2" href="#">Login</a>
+    <a class="btn btn-outline-warning mr-3" href="#">Sign Up</a>
   </div>
 
 </div>
