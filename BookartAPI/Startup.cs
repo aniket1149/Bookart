@@ -22,6 +22,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using BookartAPI.Extensions;
+using Infrastructure.Services;
 
 namespace BookartAPI
 {
@@ -38,6 +39,7 @@ namespace BookartAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ITokenService, TokenService>();
             services.AddDbContext<BookStoreContext>(x => x.UseSqlServer(_Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Infrastructure")));
 
             services.AddDbContext<AppIdentityDbContext>(
@@ -81,7 +83,7 @@ namespace BookartAPI
             });
             //services.IdentityServiceExtensions.AddIdentityServices();
 
-            services.AddIdentityServices();
+            services.AddIdentityServices(_Configuration);
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddCors(opt=>
                 {
@@ -110,7 +112,7 @@ namespace BookartAPI
             app.UseRouting();
             app.UseStaticFiles();
             app.UseCors("corspolicy");
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

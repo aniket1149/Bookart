@@ -56,6 +56,9 @@ namespace BookartAPI.Controllers
             // var books = await ibookrepo.GetLatestBookAsync();
             BookSpecParams homesort = new BookSpecParams();
             homesort.sort = "latestFirst";
+
+
+
             
             var spec = new BooksWithCategoryAndAuthor(homesort);
             var books = await _bookRepo.ListAsync(spec);

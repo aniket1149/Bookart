@@ -1,11 +1,16 @@
-﻿using BookartAPI.DTO;
+﻿using AutoMapper;
+using BookartAPI.DTO;
 using BookartAPI.Errors;
+using BookartAPI.Extensions;
 using Core.Entities.Identities;
+using Core.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BookartAPI.Controllers
@@ -14,13 +19,55 @@ namespace BookartAPI.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _sigInManager;
+        private readonly ITokenService _tokenService;
+        private readonly IMapper _mapper;
 
-        public AccountController(UserManager<AppUser>userManager,SignInManager<AppUser>sigInManager)
+        public AccountController(UserManager<AppUser>userManager,SignInManager<AppUser>sigInManager, ITokenService tokenService, IMapper mapper)
         {
             _userManager = userManager;
             _sigInManager = sigInManager;
+            _tokenService = tokenService;
+            _mapper = mapper;
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+
+            var user = await _userManager.FindEmailFromClaimsPrinciple(User);
+            return new UserDto
+            {
+                Email = user.Email,
+                DisplayName = user.DisplayName,
+                Token = _tokenService.createToken(user),
+
+            };
         }
 
+        [HttpGet("emailexists")]
+        public async Task<ActionResult<bool>> CheckEmailExistsAsync([FromQuery] string email)
+        {
+            return await _userManager.FindByEmailAsync(email) != null;
+        }
+        [HttpGet("address")]
+        [Authorize]
+        public async Task<ActionResult<AddressDto>> GetUserAddress()
+        {
+
+            var user = await _userManager.FindUserByClaimsPrincipalWithaddressAsync(User);
+            return _mapper.Map<Address, AddressDto>(user.Address);
+        }
+        [HttpPut("address")]
+        [Authorize]
+        public async Task<ActionResult<AddressDto>> UpdateUserAddress(AddressDto address)
+        {
+            var user = await _userManager.FindUserByClaimsPrincipalWithaddressAsync(User);
+            user.Address = _mapper.Map<AddressDto, Address>(address);
+
+            var res = await _userManager.UpdateAsync(user);
+            if (res.Succeeded) return Ok(_mapper.Map<Address, AddressDto>(user.Address));
+            return BadRequest("Problem Updating User");
+        }
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>>Login(LoginDto loginDto)
         {
@@ -34,7 +81,7 @@ namespace BookartAPI.Controllers
             {
                 Email = user.Email,
                 DisplayName = user.DisplayName,
-                Token = "this will be token"
+                Token = _tokenService.createToken(user),
 
             };
         }
@@ -56,9 +103,9 @@ namespace BookartAPI.Controllers
             {
                 DisplayName = user.DisplayName,
                 Email = user.Email,
-                Token = "this will be token",
+                Token = _tokenService.createToken(user),
 
-            };
+        };
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BookartAPI.Errors;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookartAPI.Controllers
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
+    
     public class BugController: BaseApiController
     {
         private readonly BookStoreContext _context;
@@ -17,6 +18,12 @@ namespace BookartAPI.Controllers
         {
            
             _context = context;
+        }
+        [HttpGet("testauth")]
+        [Authorize]
+        public ActionResult<string> GetSecretkey()
+        {
+            return "secret stuf";
         }
 
         [HttpGet("notfound")]
